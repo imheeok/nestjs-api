@@ -1,13 +1,14 @@
-import {IsNumber, IsString} from "class-validator";
+import {IsDateString, IsOptional, IsString} from "class-validator";
 
 export class CreatePodcastDto{
 
     @IsString()
     readonly title: string;
 
-    @IsNumber()
-    readonly date: Date;
+    @IsDateString()
+    readonly date: string;
 
+    @IsOptional()
     @IsString({each:true})
     readonly category: string[];
 }

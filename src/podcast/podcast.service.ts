@@ -1,6 +1,7 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
 import {Podcast} from "./entity/podcast.entity";
 import {CreatePodcastDto} from "./dto/create-podcast.dto";
+import {UpdatePodcastDto} from "./dto/update-podcast.dto";
 
 @Injectable()
 export class PodcastService {
@@ -11,7 +12,7 @@ export class PodcastService {
     }
 
     getOne(id: number): Podcast {
-        const podcast = this.podcasts.find(podcast => podcast.id === +id);
+        const podcast = this.podcasts.find(podcasts => podcasts.id === id);
         if(!podcast){
             throw new NotFoundException(`Podcast with ID ${id} not found.`);
         }
@@ -30,8 +31,8 @@ export class PodcastService {
             ...podcastData,
         });
     }
-    update(id: string, updateData){
-        const podcast = this.podcasts.find(podcast => podcast.id === +id);
+    update(id: number, updateData: UpdatePodcastDto){
+        const podcast = this.getOne(id);
         this.deleteOne(id);
         this.podcasts.push({...podcast, ...updateData});
     }

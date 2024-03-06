@@ -1,6 +1,7 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post, Query} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import {PodcastService} from "./podcast.service";
 import {CreatePodcastDto} from "./dto/create-podcast.dto";
+import {UpdatePodcastDto} from "./dto/update-podcast.dto";
 
 @Controller('podcast')
 export class PodcastController {
@@ -27,7 +28,7 @@ export class PodcastController {
   }
 
   @Patch('/:id')
-  patch(@Param('id') podcastId: number, @Body() updateData) {
+  patch(@Param('id') podcastId: number, @Body() updateData: UpdatePodcastDto) {
     return this.podcastService.update(podcastId,updateData);
   }
 }
