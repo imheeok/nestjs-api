@@ -1,5 +1,6 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
 import {Podcast} from "./entity/podcast.entity";
+import {CreatePodcastDto} from "./dto/create-podcast.dto";
 
 @Injectable()
 export class PodcastService {
@@ -9,7 +10,7 @@ export class PodcastService {
         return this.podcasts;
     }
 
-    getOne(id: string): Podcast {
+    getOne(id: number): Podcast {
         const podcast = this.podcasts.find(podcast => podcast.id === +id);
         if(!podcast){
             throw new NotFoundException(`Podcast with ID ${id} not found.`);
@@ -18,12 +19,12 @@ export class PodcastService {
     }
 
     //fake delete
-    deleteOne(id: string){
+    deleteOne(id: number){
         this.getOne(id);
         this.podcasts = this.podcasts.filter(podcast => podcast.id !== +id);
     }
 
-    create(podcastData){
+    create(podcastData: CreatePodcastDto){
         this.podcasts.push({
             id : this.podcasts.length + 1,
             ...podcastData,
