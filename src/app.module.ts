@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { PodcastController } from './podcast/podcast.controller';
-import { PodcastService } from './podcast/podcast.service';
+import { PodcastModule } from './podcast/podcast.module';
+import { AppController } from './app.controller';
 
 @Module({
-  imports: [],
-  controllers: [PodcastController],
-  providers: [PodcastService],
+  imports: [PodcastModule],
+  controllers: [AppController],
+  providers: [],
 })
 export class AppModule {}
